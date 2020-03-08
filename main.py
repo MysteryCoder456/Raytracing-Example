@@ -1,6 +1,7 @@
 import pygame
 import sys
 from wall import Wall
+from ray import Ray
 
 
 def main():
@@ -12,6 +13,7 @@ def main():
     clock = pygame.time.Clock()
 
     wall = Wall((600, 200), (600, 600))
+    ray = Ray((200, 400), (1, 0))
 
     while True:
         clock.tick(fps)
@@ -19,7 +21,16 @@ def main():
             if event.type == pygame.QUIT:
                 sys.exit()
 
+        # Logic
+        mouse_pos = pygame.mouse.get_pos()
+
+        ray.point(mouse_pos)
+
+        # Rendering
+
         win.fill((0, 0, 0))
+
+        ray.draw(win)
 
         wall.draw(win)
 
