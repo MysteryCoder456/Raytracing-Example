@@ -1,7 +1,7 @@
 import pygame
 import sys
 from wall import Wall
-from ray import Ray
+from particle import Particle
 
 
 def main():
@@ -9,11 +9,11 @@ def main():
     win = pygame.display.set_mode((width, height))
     pygame.display.set_caption("Raytracing")
 
-    fps = 40
+    fps = 45
     clock = pygame.time.Clock()
 
     wall = Wall((600, 200), (600, 600))
-    ray = Ray((200, 400), (1, 0))
+    part = Particle((width / 2, height / 2))
 
     while True:
         clock.tick(fps)
@@ -22,16 +22,13 @@ def main():
                 sys.exit()
 
         # Logic
-        mouse_pos = pygame.mouse.get_pos()
-
-        ray.point(mouse_pos)
+        part.update()
+        part.look_at(wall)
 
         # Rendering
-
         win.fill((0, 0, 0))
 
-        ray.draw(win)
-
+        part.draw(win)
         wall.draw(win)
 
         pygame.display.update()
