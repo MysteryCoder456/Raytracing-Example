@@ -1,9 +1,16 @@
+from math import cos, sin, radians
 import pygame
-from math import atan2, cos, sin, radians
 
 
 class Ray:
     def __init__(self, pos, angle):
+        """
+        Class to make a light ray
+        
+        Arguments:
+            pos {tuple} -- starting position of ray
+            angle {int} -- direction in degrees where the ray is pointing to
+        """
         self.pos = pos
 
         # Direction in a normalized vector
@@ -24,7 +31,7 @@ class Ray:
         den = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4)
 
         if den == 0:
-           return None
+            return None
 
         t = ((x1 - x3) * (y3 - y4) - (y1 - y3) * (x3 - x4)) / den
         u = -((x1 - x2) * (y1 - y3) - (y1 - y2) * (x1 - x3)) / den
@@ -41,5 +48,6 @@ class Ray:
 
     def draw(self, window):
         mult = 15
-        pos2 = (self.pos[0] + self.dir[0] * mult, self.pos[1] + self.dir[1] * mult)
+        pos2 = (self.pos[0] + self.dir[0] * mult,
+                self.pos[1] + self.dir[1] * mult)
         pygame.draw.line(window, (255, 255, 255), self.pos, pos2)

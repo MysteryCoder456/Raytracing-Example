@@ -3,6 +3,12 @@ from ray import Ray
 
 
 class Particle:
+    """
+    Make a Particle that emits light
+
+    Arguments:
+        pos {tuple} -- starting position of particle
+    """
     def __init__(self, pos):
         self.pos = pos
         self.rays = []
@@ -29,4 +35,9 @@ class Particle:
 
         # Render particle center
         c_radius = 8
-        pygame.draw.ellipse(window, (255, 255, 255), (self.pos[0] - c_radius, self.pos[1] - c_radius, c_radius * 2, c_radius * 2))
+        pygame.draw.ellipse(
+            window,
+            (255, 255, 255),
+            (self.pos[0] - c_radius, self.pos[1] -
+             c_radius, c_radius * 2, c_radius * 2)
+        )

@@ -1,5 +1,5 @@
-import pygame
 import sys
+import pygame
 from wall import Wall
 from particle import Particle
 
