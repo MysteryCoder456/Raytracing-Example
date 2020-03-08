@@ -1,13 +1,6 @@
 import pygame
 import sys
-
-
-def logic():
-    pass
-
-
-def draw():
-    pass
+from wall import Wall
 
 
 def main():
@@ -18,15 +11,17 @@ def main():
     fps = 40
     clock = pygame.time.Clock()
 
+    wall = Wall((600, 200), (600, 600))
+
     while True:
+        clock.tick(fps)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
 
         win.fill((0, 0, 0))
 
-        logic()
-        draw()
+        wall.draw(win)
 
         pygame.display.update()
 
