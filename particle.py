@@ -1,5 +1,6 @@
 import pygame
 from ray import Ray
+from dist import dist
 
 
 class Particle:
@@ -14,14 +15,31 @@ class Particle:
         self.rays = []
         self.lines = []
 
-        for angle in range(0, 359, 10):
+        # for angle in range(0, 360, 0.5):
+        #     ray = Ray(self.pos, angle)
+        #     self.rays.append(ray)
+
+        angle = 0
+        while angle < 360:
             ray = Ray(self.pos, angle)
             self.rays.append(ray)
+            angle += 0.5
 
-    def look_at(self, wall):
+    def clean(self):
+        self.lines = []
+
+    def look_at(self, walls):
         for ray in self.rays:
-            p = ray.collide_wall(wall)
-            self.lines.append((ray.pos, p))
+            closest = None
+            record = 2000
+            for wall in walls:
+                p = ray.collide_wall(wall)
+                if p is not None:
+                    d = dist(ray.pos, p)
+                    if d < record:
+                        record = d
+                        closest = p
+            self.lines.append((ray.pos, closest))
 
     def update(self):
         for ray in self.rays:
@@ -29,9 +47,11 @@ class Particle:
 
     def draw(self, window):
         # Render ray lines
+        alpha = 75
+        color = pygame.Color(255 - alpha, 255 - alpha, 255 - alpha)
         for line in self.lines:
             if line[1] is not None:
-                pygame.draw.line(window, (255, 255, 255), line[0], line[1])
+                pygame.draw.line(window, color, line[0], line[1])
 
         # Render particle center
         c_radius = 8

@@ -40,6 +40,7 @@ class Ray:
             x = x1 + t * (x2 - x1)
             y = y1 + t * (y2 - y1)
             return (x, y)
+        return None
 
     def point(self, angle):
         # Direction in a normalized vector
