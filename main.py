@@ -1,6 +1,6 @@
 import sys
 import pygame
-from math import cos, sin, radians
+from math import cos, sin, radians, sqrt
 from random import randint
 from wall import Wall
 from particle import Particle
@@ -85,12 +85,12 @@ def main():
             wall.draw(win1)
 
         for i in range(len(scene)):
-            color = map_val(scene[i], 0, width / 2, 255, 0)
+            color = map_val(scene[i] ** 2, 0, (width / 2) ** 2, 255, 0)
             w = (width/2) / len(scene)
             h = map_val(scene[i], 0, width / 2, height, 0)
             x = (i * w) - (w / 2)
             y = height / 2 - h / 2
-            pygame.draw.rect(win2, (color, color, color), (x, y, w, h))
+            pygame.draw.rect(win2, (color, color, color), (x, y, w+1, h))
 
         # Render surfaces to main window
         win_main.blit(win1, (0, 0))
