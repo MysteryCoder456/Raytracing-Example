@@ -1,4 +1,4 @@
-from math import cos, sin, radians
+from math import cos, sin, radians, atan2, degrees
 import pygame
 
 
@@ -17,6 +17,12 @@ class Ray:
         x = cos(radians(angle))
         y = sin(radians(angle))
         self.dir = (x, y)
+    
+    def get_heading(self):
+        dx = self.dir[0]
+        dy = self.dir[1]
+        angle = atan2(dy, dx)
+        return angle
 
     def collide_wall(self, wall):
         x1 = wall.pos1[0]
